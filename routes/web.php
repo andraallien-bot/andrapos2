@@ -7,6 +7,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JenisController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -31,6 +32,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('/produk', ProdukController::class);
         Route::resource('/penjualan', PenjualanController::class);
         Route::resource('/itempenjualan', ItemPenjualanController::class);
+        Route::resource('jenis', JenisController::class)
+    ->parameters([
+        'jenis' => 'jenis',
+    ]);
         Route::get('/penjualan/{penjualan}/detail',
         [PenjualanController::class,'show']
             )->name('penjualan.show');
